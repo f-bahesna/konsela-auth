@@ -27,3 +27,6 @@ Thumbs.db
 .env
 .env.backup
 .env.production
+
+BUGFIX.md
+PRODUCTION.md
