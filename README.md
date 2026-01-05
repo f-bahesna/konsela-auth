@@ -1,6 +1,6 @@
 # Konsela Auth
 
-Secure JWT-based authentication package for Pandawa framework with built-in credential verification, input validation, and automated key management.
+Secure JWT-based authentication with built-in credential verification, input validation, and automated key management.
 
 ## Features
 
