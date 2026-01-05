@@ -1,0 +1,29 @@
+# Composer
+/vendor/
+composer.lock
+
+# IDE
+/.idea/
+/.vscode/
+*.swp
+*.swo
+*~
+
+# Security - Never commit private keys!
+*.pem
+*.key
+storage/keys/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+/.phpunit.cache
+/phpunit.xml
+/coverage/
+
+# Environment
+.env
+.env.backup
+.env.production

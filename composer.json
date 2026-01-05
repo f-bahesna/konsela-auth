@@ -1,0 +1,48 @@
+{
+    "name": "konsela/auth",
+    "description": "Secure JWT-based authentication package with built-in credential verification and key management",
+    "type": "library",
+    "keywords": ["authentication", "jwt", "security", "laravel"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lianum Frada Bahesna",
+            "email": "fbahezna@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "pandawa/pandawa": "v4.x-dev",
+        "illuminate/support": "^9.0|^10.0|^11.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0",
+        "orchestra/testbench": "^8.0|^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Konsela\\Auth\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Konsela\\Auth\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Konsela\\Auth\\AuthServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "post-install-cmd": [
+            "@php -r \"if (!file_exists('config')) { mkdir('config', 0755, true); }\"",
+            "@php -r \"echo '\\n\\033[1;33m⚠ IMPORTANT: Run php artisan konsela:generate-keys to create JWT signing keys\\033[0m\\n\\n';\""
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
