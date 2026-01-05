@@ -3,12 +3,14 @@ declare(strict_types=1);
 
 namespace Konsela\Auth\Domain\Identity;
 
-use Pandawa\Module\Api\Security\Contract\SignableUserInterface;
+use Konsela\Auth\Domain\Contract\AuthenticatableInterface;
 
 /**
+ * Represents a signable user identity for JWT token generation
+ *
  * @author frada <fbahezna@gmail.com>
  */
-final class SignableIdentity implements SignableUserInterface
+final class SignableIdentity implements AuthenticatableInterface
 {
     public function __construct(
         private string|int $id,
@@ -43,5 +45,37 @@ final class SignableIdentity implements SignableUserInterface
     public function getRoles(): array
     {
         return $this->roles;
+    }
+
+    // AuthenticatableInterface implementation
+    public function getAuthIdentifier(): string|int
+    {
+        return $this->id;
+    }
+
+    public function getAuthUsername(): string
+    {
+        return $this->username;
+    }
+
+    public function getAuthPassword(): string
+    {
+        // Not needed for signing, only for authentication
+        return '';
+    }
+
+    public function getAuthRoles(): array
+    {
+        return $this->roles;
+    }
+
+    public function isAccountActive(): bool
+    {
+        return true;
+    }
+
+    public function isAccountLocked(): bool
+    {
+        return false;
     }
 }

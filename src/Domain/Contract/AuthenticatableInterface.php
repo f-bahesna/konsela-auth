@@ -41,4 +41,12 @@ interface AuthenticatableInterface
      * Check if the account is locked.
      */
     public function isAccountLocked(): bool;
+
+    /**
+     * Get the payload to be signed in JWT token.
+     * This should return claims like sub, username, roles, etc.
+     *
+     * @return array<string, mixed>
+     */
+    public function getSignPayload(): array;
 }
