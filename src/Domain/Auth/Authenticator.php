@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Konsela\Auth\Domain\Auth;
 
-use Pandawa\Module\Api\Security\Authentication\AuthenticationManager;
+use Konsela\Auth\Infrastructure\Authentication\AuthenticationManager;
 use Konsela\Auth\Domain\Contract\UserProviderInterface;
 use Konsela\Auth\Domain\Exception\AuthenticationException;
 use Konsela\Auth\Domain\Identity\SignableIdentity;
@@ -73,13 +73,7 @@ final class Authenticator
         );
 
         // Sign and return token
-        $signature = $this->manager->sign('jwt', $identity);
-
-        return new Signature(
-            $signature->getCredentials(),
-            'Bearer',
-            $signature->getAttributes()
-        );
+        return $this->manager->sign('jwt', $identity);
     }
 
     /**

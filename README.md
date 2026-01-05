@@ -1,17 +1,18 @@
 # Konsela Auth
 
-Secure JWT-based authentication with built-in credential verification, input validation, and automated key management.
+Framework-agnostic JWT authentication library with built-in credential verification, input validation, and automated key management.
 
 ## Features
 
-- JWT authentication with RSA signing (RS256)
+- Framework-agnostic architecture (no external framework dependencies)
+- JWT authentication with multiple algorithms (RS256, RS384, RS512, HS256, HS384, HS512)
 - Secure credential verification with password hashing
 - Input validation for username and password
 - Automated RSA key pair generation
 - Rate limiting support
 - Account status checking (active/locked)
 - Role-based access control ready
-- Plug-and-play installation
+- Clean architecture with Domain-Driven Design principles
 - Production-ready security best practices
 
 ## Security Highlights
@@ -176,6 +177,16 @@ class User extends Model implements AuthenticatableInterface
     public function isAccountLocked(): bool
     {
         return $this->is_locked ?? false;
+    }
+
+    public function getSignPayload(): array
+    {
+        return [
+            'sub' => $this->getAuthIdentifier(),
+            'username' => $this->getAuthUsername(),
+            'roles' => $this->getAuthRoles(),
+            'iat' => time(),
+        ];
     }
 }
 ```
@@ -391,6 +402,52 @@ If you discover a security vulnerability, please email fbahezna@gmail.com instea
 
 The MIT License (MIT). Please see [License File](LICENSE) for more information.
 
+## Production Readiness
+
+**Status: 85% Ready for Production** ✅
+
+See [PRODUCTION.md](PRODUCTION.md) for complete production deployment checklist.
+
+### What's Included:
+- ✅ Core JWT authentication
+- ✅ Token extraction & verification
+- ✅ Route protection middleware
+- ✅ Role-based authorization
+- ✅ Comprehensive tests
+- ✅ Production examples
+
+### What You Should Add:
+- ⚠️ Token blacklist (for proper logout)
+- ⚠️ Rate limiting implementation
+- ⚠️ Audit logging
+- 💡 Refresh token mechanism (optional)
+- 💡 2FA support (optional)
+
+## Quick Start Examples
+
+### Laravel
+See [examples/Laravel/](examples/Laravel/) for complete Laravel integration:
+- AuthController with login/logout
+- JWT middleware
+- Role-based middleware
+- User model & provider
+- Database migration
+
+### Standalone PHP
+See [examples/Standalone/](examples/Standalone/) for framework-agnostic usage.
+
+## Testing
+
+Run the test suite:
+
+```bash
+composer test
+```
+
+Test structure:
+- `tests/Unit/` - Unit tests for individual components
+- `tests/Feature/` - Integration tests for complete flows
+
 ## Credits
 
 - [Lianum Frada Bahesna](https://github.com/fbahesna)
@@ -399,5 +456,7 @@ The MIT License (MIT). Please see [License File](LICENSE) for more information.
 ## Support
 
 - Documentation: This README
+- Production Guide: [PRODUCTION.md](PRODUCTION.md)
+- Examples: [examples/](examples/)
 - Issues: [GitHub Issues](https://github.com/konsela/auth/issues)
 - Email: fbahezna@gmail.com

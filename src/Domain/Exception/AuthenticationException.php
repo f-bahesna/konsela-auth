@@ -29,4 +29,14 @@ class AuthenticationException extends RuntimeException
     {
         return new self("Account '{$username}' is disabled.");
     }
+
+    public static function invalidToken(string $reason = 'Invalid token'): self
+    {
+        return new self($reason);
+    }
+
+    public static function tokenExpired(): self
+    {
+        return new self('The given token has expired.');
+    }
 }
