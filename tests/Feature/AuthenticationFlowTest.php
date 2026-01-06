@@ -271,7 +271,7 @@ class MockUser implements AuthenticatableInterface
         private bool $isLocked = false
     ) {}
 
-    public function getAuthIdentifier(): string|int
+    public function getAuthIdentifier(): string
     {
         return $this->id;
     }

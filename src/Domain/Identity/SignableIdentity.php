@@ -13,7 +13,7 @@ use Konsela\Auth\Domain\Contract\AuthenticatableInterface;
 final class SignableIdentity implements AuthenticatableInterface
 {
     public function __construct(
-        private string|int $id,
+        private string $id,
         private string $username,
         private array $roles = [],
         private array $additionalClaims = [],
@@ -48,7 +48,7 @@ final class SignableIdentity implements AuthenticatableInterface
     }
 
     // AuthenticatableInterface implementation
-    public function getAuthIdentifier(): string|int
+    public function getAuthIdentifier(): string
     {
         return $this->id;
     }

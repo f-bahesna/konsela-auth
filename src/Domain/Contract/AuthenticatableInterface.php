@@ -13,7 +13,7 @@ interface AuthenticatableInterface
     /**
      * Get the unique identifier for the user.
      */
-    public function getAuthIdentifier(): string|int;
+    public function getAuthIdentifier(): string;
 
     /**
      * Get the username for the user.
